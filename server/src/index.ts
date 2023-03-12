@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -7,11 +7,14 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
 
-// import { register } from './controllers/auth';
+import authRoutes from './routes/auth';
+import userRoutes from './routes/user';
+
+import { register } from './controllers/auth';
 
 // Configurations
 dotenv.config();
-const app: Application = express();
+const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
@@ -32,8 +35,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Routes
+// Register route with upload function
 app.post('/auth/register', upload.single('picture'), register);
+
+// Routes
+app.use('/auth', authRoutes);
+app.use('/auth', userRoutes);
 
 // Mongoose setup
 const PORT = process.env.PORT || 6001;

@@ -1,43 +1,53 @@
-import { Schema, model, connect, Types } from 'mongoose';
+import mongoose, { Schema, model, connect, Types, Document } from 'mongoose';
 
-import { IUser, IFriends } from '../interfaces/User';
+import { IUser } from '../interfaces/User';
+import { IFriends } from '../interfaces/Friends';
 
-const UserSchema = new Schema<IUser>({
-  firstName: {
-    type: String,
-    required: true,
-    min: 2,
-    max: 50,
+export interface IUserModal extends IUser, Document {}
+
+const UserSchema: Schema = new Schema<IUserModal>(
+  {
+    firstName: {
+      type: String,
+      required: true,
+      min: 2,
+      max: 50,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      min: 2,
+      max: 50,
+    },
+    email: {
+      type: String,
+      required: true,
+      min: 2,
+      max: 50,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      min: 5,
+    },
+    picturePath: {
+      type: String,
+      required: false,
+      default: '',
+    },
+    friends: {
+      default: [],
+    },
+    location: String,
+    occupation: String,
+    viewedProfile: Number,
+    impressions: Number,
   },
-  lastName: {
-    type: String,
-    required: true,
-    min: 2,
-    max: 50,
+  {
+    timestamps: true,
   },
-  email: {
-    type: String,
-    required: true,
-    min: 2,
-    max: 50,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    min: 5,
-  },
-  picturePath: {
-    type: String,
-    required: false,
-    default: '',
-  },
-  friends: {
-    type: Array<IFriends>,
-    default: [],
-  },
-  location: String,
-  occupation: String,
-  viewedProfile: Number,
-  impressions: Number,
-});
+);
+
+const User = mongoose.model<IUserModal>('User', UserSchema);
+export default User;

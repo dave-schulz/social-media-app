@@ -1,24 +1,16 @@
 import { Types } from 'mongoose';
 
+import { IFriends } from './Friends';
+
 export interface IUser {
-  _id: Types.ObjectId;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   picturePath: string;
-  friends: IFriends[];
+  friends: Types.DocumentArray<IFriends>;
   occupation: string;
   location: string;
-  viewedProfile: number;
-  impressions: number;
-}
-
-export interface IFriends {
-  _id: Types.ObjectId;
-  firstName: string;
-  lastName: string;
-  picturePath: string;
-  occupation: string;
-  location: string;
+  viewedProfile?: number;
+  impressions?: number;
 }

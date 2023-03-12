@@ -10,7 +10,7 @@
     "noImplicitAny": true,
     "strictPropertyInitialization": false,
     "noUnusedLocals": false,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "skipLibCheck": true
   },
   "include": ["src/**/*"],

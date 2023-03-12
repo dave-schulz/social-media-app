@@ -8,7 +8,7 @@ export interface IUser {
   email: string;
   password: string;
   picturePath: string;
-  friends: Types.DocumentArray<IFriends>;
+  friends: IFriends[];
   occupation: string;
   location: string;
   viewedProfile?: number;

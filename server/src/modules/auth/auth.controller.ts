@@ -3,7 +3,30 @@ import { StatusCodes } from 'http-status-codes';
 import { Response, Request } from 'express';
 import bcrypt from 'bcrypt';
 import { LoginBody } from './auth.schema';
+import { RegisterUserBody } from '../user/user.schema';
+import { createUser } from '../user/user.service';
 import jwt from 'jsonwebtoken';
+
+export const registerHandler = async (
+  req: Request<object, object, RegisterUserBody>,
+  res: Response,
+) => {
+  try {
+    const { firstName, lastName, email, password } = req.body;
+
+    const newUser = createUser({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+
+    const savedUser = await (await newUser).save();
+    res.status(StatusCodes.CREATED).json(savedUser);
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err.message });
+  }
+};
 
 export const loginHandler = async (
   req: Request<object, object, LoginBody>,

@@ -1,27 +1,59 @@
-import { createUser } from './../user/user.service';
-import { RegisterUserBody } from './../user/user.schema';
-import { Response, Request } from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import { StatusCodes } from 'http-status-codes';
+import { Response, Request } from 'express';
+import { UserModel } from './user.model';
 
-export const registerHandler = async (
-  req: Request<object, object, RegisterUserBody>,
-  res: Response,
-) => {
+export const getUserHandler = async (req: Request, res: Response) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { id } = req.params;
+    const user = await UserModel.findById(id);
+    res.status(StatusCodes.OK).json(user);
+  } catch (err) {
+    res.status(StatusCodes.NOT_FOUND).json({ message: err.message });
+  }
+};
 
-    const newUser = createUser({
-      firstName,
-      lastName,
-      email,
-      password,
+export const getUserFriendsHandler = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const user = await UserModel.findById(id);
+    const friends = await Promise.all(
+      user.friends.map((id) => UserModel.findById(id)),
+    );
+    const formattedFriends = friends.map(({ ...friendsData }) => {
+      return { ...friendsData };
+    });
+    res.status(StatusCodes.OK).json(formattedFriends);
+  } catch (err) {
+    res.status(StatusCodes.NOT_FOUND).json({ message: err.message });
+  }
+};
+
+export const addRemoveFriendHandler = async (req: Request, res: Response) => {
+  try {
+    const { id, friendId } = req.params;
+    const user = await UserModel.findById(id);
+    const friend = await UserModel.findById(friendId);
+
+    if (user.friends.includes(friendId)) {
+      user.friends = user.friends.filter((id) => id !== friendId);
+      friend.friends = friend.friends.filter((id) => id !== id);
+    } else {
+      user.friends.push(friendId);
+      friend.friends.push(id);
+    }
+
+    await user.save();
+    await friend.save();
+
+    const friends = await Promise.all(
+      user.friends.map((id) => UserModel.findById(id)),
+    );
+    const formattedFriends = friends.map(({ ...friendsData }) => {
+      return { ...friendsData };
     });
 
-    const savedUser = await (await newUser).save();
-    res.status(StatusCodes.CREATED).json(savedUser);
+    res.status(StatusCodes.OK).json(formattedFriends);
   } catch (err) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err.message });
+    res.status(StatusCodes.NOT_FOUND).json({ message: err.message });
   }
 };

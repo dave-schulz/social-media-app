@@ -17,7 +17,7 @@ export const verifyToken = async (
     }
 
     const verified = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
-    req.user = verified;
+    res.locals.user = verified;
 
     next();
   } catch (err) {

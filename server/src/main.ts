@@ -27,7 +27,7 @@ app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
+app.use('/api/users', userRoutes);
 
 // Port & Database connection
 const PORT = process.env.port || 6000;

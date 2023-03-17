@@ -1,15 +1,16 @@
 import express from 'express';
-import { upload } from '../../utils/upload';
-import { processRequestBody } from 'zod-express-middleware';
-import { registerHandler } from './user.controller';
-import { userRegisterSchema } from './user.schema';
+import { verifyToken } from '../../middleware/auth';
+import {
+  getUserHandler,
+  getUserFriendsHandler,
+  addRemoveFriendHandler,
+} from './user.controller';
 
 const router = express.Router();
 
-router.post(
-  '/register',
-  [upload.single('picture'), processRequestBody(userRegisterSchema.body)],
-  registerHandler,
-);
+router.get('/:id', verifyToken, getUserHandler);
+router.get('/:id/friends', verifyToken, getUserFriendsHandler);
+
+router.patch('/:id/:friendId', verifyToken, addRemoveFriendHandler);
 
 export default router;

@@ -1,9 +1,8 @@
 import express from 'express';
-import { registerHandler } from './auth.controller';
-import { upload } from '../../utils/upload';
+import { loginHandler } from './auth.controller';
 
 const router = express.Router();
 
-router.post('/', upload.single('picture'), registerHandler);
+router.post('/login', loginHandler);
 
 export default router;

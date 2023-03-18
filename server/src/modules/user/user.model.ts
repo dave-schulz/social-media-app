@@ -1,4 +1,4 @@
-import { getModelForClass, prop, pre } from '@typegoose/typegoose';
+import { getModelForClass, prop, pre, Ref } from '@typegoose/typegoose';
 import bcrypt from 'bcrypt';
 
 @pre<User>('save', async function (next) {
@@ -27,8 +27,8 @@ export class User {
   @prop({ default: '' })
   public picturePath?: string;
 
-  @prop({ default: [] })
-  public friends?: Array<any>;
+  @prop()
+  public friends?: any;
 
   @prop()
   public location?: string;
@@ -42,9 +42,9 @@ export class User {
   @prop()
   public impressions?: number;
 
-  public async comparePassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(this.password, password);
-  }
+  // public async comparePassword(password: string): Promise<boolean> {
+  //   return await bcrypt.compare(this.password, password);
+  // }
 }
 
 export const UserModel = getModelForClass(User, {

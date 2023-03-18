@@ -6,7 +6,7 @@ dotenv.config();
 import morgan from 'morgan';
 import path from 'path';
 import logger from './utils/logger';
-// import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url';
 import { connectToDatabase } from './utils/database';
 
 import authRoutes from './modules/auth/auth.router';
@@ -14,8 +14,8 @@ import userRoutes from './modules/user/user.router';
 import postRoutes from './modules/post/post.router';
 
 // Configurations
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+// const __filename1 = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename1);
 
 const app = express();
 app.use(express.json());

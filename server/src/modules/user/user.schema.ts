@@ -22,13 +22,15 @@ export const userRegisterSchema = {
     })
       .min(6, 'Password must be at least 6 characters long')
       .max(64, 'Password should not be longer than 64 characters'),
-    passwordConfirmation: string({
-      required_error: 'Password is required',
-    }),
-  }).refine((data) => data.password === data.passwordConfirmation, {
-    message: 'Passwords do not match',
-    path: ['passwordConfirmation'],
+    // passwordConfirmation: string({
+    //   required_error: 'Password is required',
+    // }),
   }),
+
+  // .refine((data) => data.password === data.passwordConfirmation, {
+  //   message: 'Passwords do not match',
+  //   path: ['passwordConfirmation'],
+  // }),
 };
 
 export type RegisterUserBody = TypeOf<typeof userRegisterSchema.body>;

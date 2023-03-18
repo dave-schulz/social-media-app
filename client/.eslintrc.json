@@ -19,7 +19,8 @@
   "rules": {
     "@typescript-eslint/no-empty-function": 0,
     "no-empty-function": 0,
-    "react/react-jsx-in": 0
+    "react/react-jsx-in": 0,
+    "@typescript-eslint/no-empty-interface": 0
   },
   "settings": {
     "import/resolver": {

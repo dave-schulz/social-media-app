@@ -1,9 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface IUser {
-  firstName: string;
-  lastName: string;
-  friends: Array<object>;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  password: string;
+  location?: string;
+  occupation?: string;
+  // picture?: string;
+  friends?: Array<object>;
 }
 
 export interface IPost {

@@ -1,4 +1,5 @@
-import { getModelForClass, prop, pre } from '@typegoose/typegoose';
+import { getModelForClass, prop, PropType } from '@typegoose/typegoose';
+import { Schema } from 'mongoose';
 
 export class Post {
   @prop({ require: true })
@@ -25,8 +26,8 @@ export class Post {
   @prop()
   public likes: any;
 
-  @prop({ default: [] })
-  comments: Array<object>;
+  @prop({ type: () => [String] })
+  public comments: string[];
 }
 
 export const PostModel = getModelForClass(Post, {

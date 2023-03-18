@@ -16,7 +16,8 @@ export const verifyToken = async (
       token = token.slice(7, token.length).trimStart();
     }
 
-    const verified = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+    const verified = jwt.verify(token, `${process.env.JWT_PRIVATE_KEY}`);
+
     res.locals.user = verified;
 
     next();

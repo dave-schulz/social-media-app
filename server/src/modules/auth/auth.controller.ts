@@ -32,6 +32,9 @@ export const loginHandler = async (
   req: Request<object, object, LoginBody>,
   res: Response,
 ) => {
+  console.log(req.body);
+  console.log(process.env.PRIVATE_KEY);
+
   try {
     const { email, password } = req.body;
     const user = await findUserByEmail(email);
@@ -48,10 +51,13 @@ export const loginHandler = async (
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: 'Invalid credentials' });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_PRIVATE_KEY);
+    const token = jwt.sign({ id: user._id }, `${process.env.JWT_PRIVATE_KEY}`, {
+      algorithm: 'RS256',
+    });
     delete user.password;
     res.status(StatusCodes.OK).json({ token, user });
   } catch (err) {
+    console.log(err);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err.message });
   }
 };

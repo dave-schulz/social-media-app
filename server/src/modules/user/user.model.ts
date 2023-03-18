@@ -1,14 +1,6 @@
 import { getModelForClass, prop, pre } from '@typegoose/typegoose';
 import bcrypt from 'bcrypt';
 
-interface IFriend {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  picturePath?: string;
-}
-
 @pre<User>('save', async function (next) {
   if (this.isModified('password') || this.isNew) {
     const salt = bcrypt.genSaltSync();
@@ -38,16 +30,16 @@ export class User {
   @prop({ default: [] })
   public friends?: Array<any>;
 
-  @prop({})
+  @prop()
   public location?: string;
 
-  @prop({})
+  @prop()
   public occupation?: string;
 
-  @prop({})
+  @prop()
   public viewedProfile?: number;
 
-  @prop({})
+  @prop()
   public impressions?: number;
 
   public async comparePassword(password: string): Promise<boolean> {

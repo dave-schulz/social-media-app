@@ -11,6 +11,7 @@ import { connectToDatabase } from './utils/database';
 
 import authRoutes from './modules/auth/auth.router';
 import userRoutes from './modules/user/user.router';
+import postRoutes from './modules/post/post.router';
 
 // Configurations
 // const __filename = fileURLToPath(import.meta.url);
@@ -28,6 +29,7 @@ app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 // Port & Database connection
 const PORT = process.env.port || 6000;

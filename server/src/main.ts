@@ -14,9 +14,6 @@ import userRoutes from './modules/user/user.router';
 import postRoutes from './modules/post/post.router';
 
 // Configurations
-// const __filename1 = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename1);
-
 const app = express();
 app.use(express.json());
 app.use(helmet());

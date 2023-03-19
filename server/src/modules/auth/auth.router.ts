@@ -10,7 +10,8 @@ const router = express.Router();
 
 router.post(
   '/register',
-  [upload.single('picture'), processRequestBody(userRegisterSchema.body)],
+  upload.single('picture'),
+  processRequestBody(userRegisterSchema.body),
   registerHandler,
 );
 

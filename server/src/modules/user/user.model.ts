@@ -1,4 +1,4 @@
-import { getModelForClass, prop, pre, Ref } from '@typegoose/typegoose';
+import { getModelForClass, prop, pre } from '@typegoose/typegoose';
 import bcrypt from 'bcrypt';
 
 @pre<User>('save', async function (next) {
@@ -25,7 +25,7 @@ export class User {
   public password: string;
 
   @prop({ default: '' })
-  public picturePath?: string;
+  public picturePath: string;
 
   @prop()
   public friends?: any;

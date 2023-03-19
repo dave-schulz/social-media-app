@@ -22,6 +22,9 @@ export const userRegisterSchema = {
     })
       .min(6, 'Password must be at least 6 characters long')
       .max(64, 'Password should not be longer than 64 characters'),
+    picturePath: string({
+      required_error: 'Picture is required',
+    }),
     // passwordConfirmation: string({
     //   required_error: 'Password is required',
     // }),

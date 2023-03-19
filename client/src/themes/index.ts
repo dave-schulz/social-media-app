@@ -13,6 +13,7 @@ interface CustomPalettes {
     alt: string;
   };
 }
+
 declare module '@mui/material/styles' {
   interface PaletteOptions extends CustomPalettes {}
 }

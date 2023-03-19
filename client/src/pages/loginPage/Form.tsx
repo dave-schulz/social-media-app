@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { setLogin } from '@/state';
 import Dropzone from 'react-dropzone';
 import FlexBetween from '@/components/FlexBetween';
-import { IUser } from '@/state';
+import { IUser } from '@/types/interfaces';
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required('required'),
@@ -24,7 +24,7 @@ const registerSchema = yup.object().shape({
   password: yup.string().required('required'),
   location: yup.string().required('required'),
   occupation: yup.string().required('required'),
-  // picture: yup.string().required('required'),
+  picture: yup.string().required('required'),
 });
 
 const loginSchema = yup.object().shape({
@@ -39,7 +39,7 @@ const initialValuesRegister: IUser = {
   password: '',
   location: '',
   occupation: '',
-  // picture: '',
+  picture: '',
 };
 
 const initialValuesLogin: IUser = {
@@ -56,13 +56,12 @@ const Form = () => {
   const isLogin = pageType === 'login';
   const isRegister = pageType === 'register';
 
-  const register = async (values: any, onSubmitProps: any) => {
-    // this allows us to send form info with image
+  const register = async (values: IUser | any, onSubmitProps: any) => {
     const formData = new FormData();
     for (const value in values) {
       formData.append(value, values[value]);
     }
-    // formData.append('picturePath', values.picture.name);
+    formData.append('picturePath', values.picture.name);
 
     const savedUserResponse = await fetch(
       'http://localhost:3001/api/auth/register',
@@ -72,7 +71,6 @@ const Form = () => {
       },
     );
 
-    console.log(savedUserResponse);
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
 
@@ -81,7 +79,7 @@ const Form = () => {
     }
   };
 
-  const login = async (values: any, onSubmitProps: any) => {
+  const login = async (values: IUser, onSubmitProps: any) => {
     const loggedInResponse = await fetch(
       'http://localhost:3001/api/auth/login',
       {
@@ -179,14 +177,13 @@ const Form = () => {
                   helperText={touched.occupation && errors.occupation}
                   sx={{ gridColumn: 'span 4' }}
                 />
-                {/* <Box
+                <Box
                   gridColumn="span 4"
                   border={`1px solid ${palette.neutral.medium}`}
                   borderRadius="5px"
                   p="1rem"
-                > */}
-                {/* <Dropzone
-                    acceptedFiles=".jpg,.jpeg,.png"
+                >
+                  <Dropzone
                     multiple={false}
                     onDrop={(acceptedFiles) =>
                       setFieldValue('picture', acceptedFiles[0])
@@ -210,8 +207,8 @@ const Form = () => {
                         )}
                       </Box>
                     )}
-                  </Dropzone> */}
-                {/* </Box> */}
+                  </Dropzone>
+                </Box>
               </>
             )}
 

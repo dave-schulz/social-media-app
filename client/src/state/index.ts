@@ -1,26 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface IUser {
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  password: string;
-  location?: string;
-  occupation?: string;
-  // picture?: string;
-  friends?: Array<object>;
-}
-
-export interface IPost {
-  _id: string;
-}
-
-export interface IState {
-  mode: string;
-  user: IUser;
-  token: string | null;
-  posts: Array<IPost>;
-}
+import { IState, IUser, IPost } from '@/types/interfaces';
 
 const initialState: IState = {
   mode: 'light',

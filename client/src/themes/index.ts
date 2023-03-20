@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
-interface CustomPalettes {
+export interface CustomPalettes {
   neutral: {
     dark: string;
     light: string;

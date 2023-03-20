@@ -27,7 +27,8 @@ import { useNavigate } from 'react-router-dom';
 import FlexBetween from '@/components/FlexBetween';
 
 const NavBar: FC = (): ReactElement => {
-  const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
+  const [isMobileMenuToggled, setIsMobileMenuToggled] =
+    useState<boolean>(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state: IState) => state.user);

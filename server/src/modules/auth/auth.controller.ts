@@ -11,6 +11,8 @@ export const registerHandler = async (
   req: Request<object, object, RegisterUserBody>,
   res: Response,
 ) => {
+  console.log(req.body);
+
   try {
     const {
       firstName,
@@ -28,13 +30,17 @@ export const registerHandler = async (
       email,
       password,
       picturePath,
+      friends: [],
       location,
       occupation,
+      viewedProfile: Math.floor(Math.random() * 10000),
+      impressions: Math.floor(Math.random() * 10000),
     });
 
     const savedUser = await (await newUser).save();
     res.status(StatusCodes.CREATED).json(savedUser);
   } catch (err) {
+    console.log(err);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err.message });
   }
 };

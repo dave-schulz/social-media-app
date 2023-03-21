@@ -1,5 +1,4 @@
-import { getModelForClass, prop, PropType } from '@typegoose/typegoose';
-import { Schema } from 'mongoose';
+import { getModelForClass, prop } from '@typegoose/typegoose';
 
 export class Post {
   @prop({ require: true })

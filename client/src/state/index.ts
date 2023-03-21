@@ -30,15 +30,15 @@ export const authSlice = createSlice({
       if (state.user) {
         state.user.friends = action.payload.friends;
       } else {
-        console.log('USer friends not available');
+        console.error('user friends non-existent :(');
       }
     },
     setPosts: (state, action: PayloadAction<{ posts: Array<IPost> }>) => {
       state.posts = action.payload.posts;
     },
-    setPost: (state, action: PayloadAction<{ post: IPost; id: string }>) => {
+    setPost: (state, action: PayloadAction<{ post: IPost; id?: string }>) => {
       const updatedPosts = state.posts.map((post) => {
-        if (post._id === action.payload.id) return action.payload.post;
+        if (post._id === action.payload.post._id) return action.payload.post;
         return post;
       });
       state.posts = updatedPosts;

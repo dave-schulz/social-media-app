@@ -25,9 +25,9 @@ import WidgetWrapper from '@/components/WidgetWrapper';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPosts } from '@/state';
-import { IPost, IState, IMyPost } from '@/types/interfaces';
+import { IPost, IState, IMyPostWidget } from '@/types/interfaces';
 
-const MyPostWidget: FC<IMyPost> = (props): ReactElement => {
+const MyPostWidget: FC<IMyPostWidget> = (props): ReactElement => {
   const dispatch = useDispatch();
   const [isImage, setIsImage] = useState(false);
   const [image, setImage] = useState<any>(null);

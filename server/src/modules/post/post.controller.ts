@@ -26,7 +26,10 @@ export const createPostHandler = async (
       description,
       userPicturePath: user.picturePath,
       picturePath,
-      likes: {},
+      likes: {
+        type: new Map(),
+        of: true,
+      },
       comments: [],
     });
 

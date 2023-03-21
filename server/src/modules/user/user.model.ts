@@ -1,3 +1,4 @@
+import { array } from 'zod';
 import { getModelForClass, prop, pre } from '@typegoose/typegoose';
 import bcrypt from 'bcrypt';
 
@@ -27,8 +28,8 @@ export class User {
   @prop({ default: '' })
   public picturePath: string;
 
-  @prop()
-  public friends?: any;
+  @prop({ default: [] })
+  public friends?: Array<object>;
 
   @prop()
   public location?: string;

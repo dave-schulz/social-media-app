@@ -12,14 +12,24 @@ export const registerHandler = async (
   res: Response,
 ) => {
   try {
-    const { firstName, lastName, email, password, picturePath } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      picturePath,
+      location,
+      occupation,
+    } = req.body;
 
     const newUser = createUser({
       firstName,
       lastName,
       email,
       password,
-      picturePath: '/public/assets/' + picturePath,
+      picturePath,
+      location,
+      occupation,
     });
 
     const savedUser = await (await newUser).save();

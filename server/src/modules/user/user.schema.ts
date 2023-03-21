@@ -25,6 +25,13 @@ export const userRegisterSchema = {
     picturePath: string({
       required_error: 'Picture is required',
     }),
+    location: string({
+      required_error: 'Location is required',
+    }),
+    occupation: string({
+      required_error: 'Occupation is required',
+    }),
+
     // passwordConfirmation: string({
     //   required_error: 'Password is required',
     // }),

@@ -37,7 +37,7 @@ const NavBar: FC = (): ReactElement => {
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
-  const background = theme.palette.backgroundColor.default;
+  const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.backgroundColor.alt;
 

@@ -9,7 +9,6 @@ export interface CustomPalettes {
     medium: string;
   };
   backgroundColor: {
-    default: string;
     alt: string;
   };
 }
@@ -69,8 +68,10 @@ export const themeSettings = (mode: any) => {
               medium: colorTokens.grey[400],
               light: colorTokens.grey[700],
             },
-            backgroundColor: {
+            background: {
               default: colorTokens.grey[900],
+            },
+            backgroundColor: {
               alt: colorTokens.grey[800],
             },
           }
@@ -87,8 +88,10 @@ export const themeSettings = (mode: any) => {
               medium: colorTokens.grey[300],
               light: colorTokens.grey[50],
             },
-            backgroundColor: {
+            background: {
               default: colorTokens.grey[10],
+            },
+            backgroundColor: {
               alt: colorTokens.grey[0],
             },
           }),

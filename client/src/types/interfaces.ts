@@ -12,13 +12,22 @@ export interface IUser {
   impressions?: string;
 }
 
+export interface IMyPost {
+  picturePath: string;
+  onChange?: (e: React.ChangeEvent) => void;
+}
+
 export interface IUserProfile {
   image: string;
   size?: string;
 }
 
 export interface IPost {
-  _id: string;
+  _id?: string;
+  picturePath?: string;
+  image?: string | any;
+  user?: any;
+  posts?: Array<IPost>;
 }
 
 export interface IState {

@@ -83,8 +83,8 @@ const UserWidget = ({
             <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
         </FlexBetween>
-        <ManageAccountsOutlined />
       </FlexBetween>
+      <ManageAccountsOutlined />
       <Divider />
 
       <Box p="1rem 0">
